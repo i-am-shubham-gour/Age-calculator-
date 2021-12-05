@@ -6,7 +6,11 @@ const url = require('url');
 
 http.createServer((req, res) => {
     
-    const student = url.parse(req.url, true).query;
+ let myPath = url.parse(req.url, true).pathname;
+
+  if(myPath === '/age'){
+
+    const student = url.parse(req.url , true).query;
 
     let myDate = (student.date)
    
@@ -29,10 +33,15 @@ http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
 
     res.end(`<p>hello ${myName}</p> 
-    <p>You are currently ${finalValue} years old</p>
+    <p>You are currently ${finalValue} years old</p> 
     `);
    
     res.end();
+  }else{
+      console.log('Url is not valid');
+  }
+
+    
 
 }).listen(8080, () => 
 console.log('Server is running')
